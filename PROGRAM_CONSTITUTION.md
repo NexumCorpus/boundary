@@ -166,6 +166,24 @@ certified via the station gate's LLM-timeout variant. Budget: ≤ 60 organism-ru
 gate timeout variant + one pilot organism per condition to validate the harness — pilot
 examines harness function only, never the ordering of conditions.
 
+## Amendment 1 (2026-07-02) — correction to §3, issued the day of founding
+
+The §3 evidence table credits the demiurge with a "fabricated citation."
+**A 2026-07-02 excavation of the demiurge repository proved this accusation
+false**: the citation (arXiv:2512.24601) is a real, externally verified
+paper; the specimen summarized it accurately; a prior experimenter session
+convicted it by pattern-match on a literary coincidence (24601 = Jean
+Valjean's prisoner number) without verification, and the error propagated
+into this constitution's first commit. The remaining demiurge markers
+(comment theater, pinned metrics) are confirmed with commit-hash receipts —
+see the Demiurge repo's CASE-RECORD.md Exhibit D.
+
+Standing rule extracted from this correction: **claims about specimens are
+claims** — they enter reports only with receipts, and any accusation of
+fabrication must itself be verified before it is recorded. The §3 table is
+left as originally written (this constitution is append-only); readers must
+apply this amendment.
+
 ## 10. Provenance
 
 Assets this program stands on: E:\atlas-station (claim gate, self-dispatch, CLAIMS.json),
