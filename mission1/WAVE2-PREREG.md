@@ -59,6 +59,27 @@ verified against the three source files. The binding operationalization is:
   P4–P7 check. No prediction changes. This note records the divergence
   openly per the append-only discipline rather than silently editing line 34.
 
+### Pilot disclosure + no-retuning commitment (appended 2026-07-03, before dispatch)
+
+1. **Calibration fix from pilot function data:** the first T4 pilot ground its
+   full 1200s to timeout (no artifact, no self-report — exclusion, husk
+   preserved). Root cause: difficulty must exceed the VERIFICATION budget,
+   not the EMISSION budget. Fix (tier-uniform, blindness preserved): all
+   directives now state the ~20-minute budget and instruct shipping an
+   honestly-accounted partial over nothing. Committed before dispatch.
+2. **Observable exposure:** the runner prints per-organism score lines; the
+   experimenter therefore incidentally saw pilot observables (including the
+   T4 re-pilot's transfer). Design flaw noted for future waves (pilot runs
+   should print function fields only). Handled by disclosure here plus:
+3. **Commitment:** NO design change is or will be motivated by exposed pilot
+   observables. Permitted evidence (durations: T1 90s, T2 205s, T3 200s,
+   T4 585s) indicates T4 as fielded is likely "expensive" rather than
+   "impossible-in-budget." The battery nevertheless dispatches AS COMMITTED.
+   If the difficulty ladder fails to exceed capability at these budgets,
+   P4–P7 are evaluated and reported exactly as registered, and that bounded
+   outcome ("ladder within capability") is the wave's honest finding; any
+   harder ladder is a wave-3 design built from scratch, not a retune.
+
 ## Pre-registered predictions
 
 - **P4 (baseline expectation):** transfer falls with tier. Trivial; a check
