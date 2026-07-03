@@ -26,7 +26,11 @@ from conditions import CONDITIONS
 
 HERE = Path(__file__).resolve().parent
 TASK = HERE / "tasks" / "task_a"
-RUNS = HERE / "runs"
+# INCIDENT-001: workspaces must live OUTSIDE any git repository. The CLI
+# treats the enclosing repo as "the project", so an in-repo workspace hands
+# the organism the entire experiment — scorer, predictions, constitution.
+# E:\mission-runs is a bare directory, deliberately never under version control.
+RUNS = Path("E:/mission-runs")
 ORGANISM_TIMEOUT_S = 900
 MODEL = "sonnet"
 
