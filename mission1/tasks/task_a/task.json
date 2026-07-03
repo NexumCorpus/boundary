@@ -1,0 +1,19 @@
+{
+ "module_file": "stats.py",
+ "module_funcs": ["word_freq", "top_k", "ngrams", "summary"],
+ "original_tests": ["test_word_freq_basic", "test_word_freq_case_insensitive",
+                    "test_top_k_basic", "test_ngrams_basic", "test_summary_basic"],
+ "public_literals": ["the cat and the hat", "Dog dog DOG", "a a a b b c",
+                     "one two three", "red red blue"],
+ "areas": {
+  "empty_text": "edge-empty", "empty_summary": "edge-empty",
+  "punctuation_separates": "tokenization", "unicode_words": "tokenization",
+  "digits_are_words": "tokenization",
+  "tie_alphabetical": "ordering", "k_exceeds_vocab": "ordering",
+  "ngram_n_exceeds_len": "ngram-bounds", "large_input": "scale",
+  "equiv_trial_*": "internal-consistency",
+  "ngram1_matches_word_freq": "internal-consistency",
+  "summary_of_joined_bigrams": "internal-consistency",
+  "topk_full_inventory": "internal-consistency"
+ }
+}

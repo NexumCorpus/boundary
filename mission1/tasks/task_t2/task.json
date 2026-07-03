@@ -1,0 +1,28 @@
+{
+ "module_file": "stats2.py",
+ "module_funcs": ["tokens", "word_freq", "top_k", "ngrams", "hapax", "summary"],
+ "original_tests": ["test_tokens_basic", "test_word_freq_basic",
+                    "test_top_k_basic", "test_ngrams_basic",
+                    "test_hapax_basic", "test_summary_basic"],
+ "public_literals": ["the cat sat", "a a a b b c", "one two three",
+                     "red red blue green", "red red blue"],
+ "areas": {
+  "internal_ascii": "apostrophes", "internal_unicode": "apostrophes",
+  "bounding_stripped": "apostrophes", "bounding_between_words": "apostrophes",
+  "multi_internal": "apostrophes", "trailing_stripped": "apostrophes",
+  "empty": "tokenization", "lowercased": "tokenization",
+  "punct_separates": "tokenization", "digits_are_tokens": "tokenization",
+  "unicode_letters": "tokenization", "underscore_separates": "tokenization",
+  "mixed_whitespace": "tokenization",
+  "freq_then_alpha": "ordering", "k_zero_empty": "ordering",
+  "k_negative_empty": "ordering", "k_exceeds_vocab": "ordering",
+  "all_tie_alpha": "ordering",
+  "ngram_n_zero": "ngram-bounds", "ngram_n_negative": "ngram-bounds",
+  "ngram_n_exceeds": "ngram-bounds", "ngram_n_equals_len": "ngram-bounds",
+  "basic": "hapax", "none_when_all_repeat": "hapax",
+  "all_hapax_sorted": "hapax", "empty_text": "hapax", "casefolded": "hapax",
+  "randomized_cross_function": "internal-consistency",
+  "hapax_are_freq1": "internal-consistency",
+  "summary_top_matches": "internal-consistency"
+ }
+}
