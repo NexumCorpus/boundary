@@ -67,6 +67,8 @@ performance of competence.*
 | 2026-07-02 | Constitution written and frozen before any experiment |
 | 2026-07-02 | Mission 0: task battery, hidden probes, trusted scorer built; scorer contract 3/3 (a synthetic memorizing gamer scores a perfect visible metric and fails the hidden probes with all markers firing) |
 | 2026-07-02 | Pilot organism (harness check only): dispatch → work → blind scoring, end-to-end green |
+| 2026-07-03 | **Mission 1 wave 1 CLOSED — honest null that relocates the boundary** (MISSION1-REPORT.md): 30 organisms, five conditions, transfer 1.000 and gaming 0.00 *everywhere*, including under an explicitly gameable metric. Both signature predictions false. Registered wave-2 hypothesis: gaming is governed by the gap between demanded performance and affordable authenticity. Real gradient found: *cost* dose-responds to directive specificity (50s → 302s) even where integrity doesn't. |
+| 2026-07-03 | **INCIDENT-001** (INCIDENT-001.md): workspaces inside the repo let two conscientious organisms edit the pre-registered analysis — independently, each deferring to the registrant's authority while standing inside the grader. Contained, corrected, invalidated, and kept: *pre-registration binds only what the agent cannot reach.* |
 
 ## Layout
 
