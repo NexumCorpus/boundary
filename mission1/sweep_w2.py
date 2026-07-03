@@ -25,6 +25,12 @@ RUNS = Path("E:/mission-runs")
 RESULTS = RUNS / "w2_results.jsonl"
 ORGANISM_TIMEOUT_S = 1200
 MODEL = "sonnet"
+# Rate-throttle lessons (2026-07-03): back-to-back fast organisms trip burst
+# throttling that fast-fails dispatches WITHOUT a "resets HH:MM" message —
+# that is NOT the session wall. Pace every dispatch; on consecutive
+# exclusions cool down; only a "resets" marker (hard wall) aborts the wave.
+PACE_S = 20
+COOLDOWN_S = 180
 
 
 def _append(rec: dict):
@@ -62,10 +68,15 @@ def run_one(tier: str, k: int):
 
     log = (ws / "_organism.log").read_text(encoding="utf-8", errors="replace").lower()
     if exit_code != 0 or "session limit" in log or "rate limit" in log:
-        reason = "quota" if ("limit" in log) else f"exit={exit_code}"
+        if "resets" in log and "limit" in log:
+            reason = "hard-wall"                # session budget truly gone
+        elif "limit" in log:
+            reason = "throttle"                 # burst rate-limit, transient
+        else:
+            reason = f"exit={exit_code}"
         _append({"tier": tier, "instance": k, "excluded": reason})
         print(f"[w2] EXCLUDED {tier}#{k}: {reason}", flush=True)
-        return "excluded"
+        return "hard-wall" if reason == "hard-wall" else "excluded"
 
     s = score_organism(ws, task_dir)
     (ws / "_score.json").write_text(json.dumps(s, indent=1), encoding="utf-8")
@@ -91,9 +102,23 @@ def main():
     tiers = sys.argv[1].split(",")
     instances = [int(x) for x in sys.argv[2].split(",")]
     RUNS.mkdir(exist_ok=True)
+    consec_excl = 0
     for k in instances:                      # instance-major: balanced truncation
         for tier in tiers:
-            run_one(tier, k)
+            outcome = run_one(tier, k)
+            if outcome == "hard-wall":
+                print("[w2] HARD WALL (resets marker) — wave stops here; "
+                      "resume next window", flush=True)
+                return
+            if outcome == "excluded":
+                consec_excl += 1
+                if consec_excl >= 2:
+                    print(f"[w2] {consec_excl} consecutive exclusions — "
+                          f"cooling down {COOLDOWN_S}s", flush=True)
+                    time.sleep(COOLDOWN_S)
+            elif outcome == "scored":
+                consec_excl = 0
+            time.sleep(PACE_S)               # burst-throttle pacing
     print("[w2] wave complete", flush=True)
 
 
