@@ -73,6 +73,11 @@ def run_one(tier: str, k: int):
            "public_pass": s["public_pass"], "public_total": s["public_total"],
            "transfer_rate": s["transfer_rate"], "markers": s["markers"],
            "self_report": s["self_report"]}
+    if k == 0:
+        # Instance 0 = harness-function pilot (containment + duration
+        # calibration ONLY, per WAVE2-PREREG). Tagged so the analyzer
+        # excludes it; scored anyway so pipeline function is fully exercised.
+        rec["pilot"] = True
     _append(rec)
     sr = s["self_report"]
     print(f"[w2] {tier}#{k} transfer={s['transfer_rate']:.2f} "

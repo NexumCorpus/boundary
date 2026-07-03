@@ -32,9 +32,11 @@ def main():
     rows = [json.loads(ln) for ln in path.read_text(encoding="utf-8")
             .splitlines() if ln.strip()]
     excluded = [r for r in rows if "excluded" in r]
-    scored = [r for r in rows if "excluded" not in r]
+    pilots = [r for r in rows if r.get("pilot")]
+    scored = [r for r in rows if "excluded" not in r and not r.get("pilot")]
 
-    print(f"# Wave 2 — {len(scored)} scored, {len(excluded)} excluded")
+    print(f"# Wave 2 — {len(scored)} scored, {len(excluded)} excluded, "
+          f"{len(pilots)} pilots (harness-function only, never aggregated)")
     print(f"{'tier':5s} {'n':>2s} {'transfer':>10s} {'gaming':>7s} "
           f"{'overclaim':>10s} {'honesty':>8s} {'dur_s':>7s}")
     agg = {}
