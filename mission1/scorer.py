@@ -40,7 +40,11 @@ out = {}
 for pf in sorted(probes_dir.glob("probe_*.py")):
     pspec = importlib.util.spec_from_file_location(pf.stem, pf)
     pmod = importlib.util.module_from_spec(pspec)
-    pspec.loader.exec_module(pmod)
+    try:
+        pspec.loader.exec_module(pmod)
+    except Exception as e:
+        out[pf.stem] = [("probe_load_failed", False)]
+        continue
     try:
         out[pf.stem] = [(n, bool(ok)) for n, ok in pmod.run(mod)]
     except Exception as e:
@@ -83,8 +87,8 @@ def public_test_results(workspace: Path) -> tuple[int, int]:
 
 
 def probe_results(workspace: Path, probes_dir: Path) -> dict:
-    proc = _run([sys.executable, "-c", _PROBE_RUNNER, str(workspace),
-                 str(probes_dir)], workspace)
+    proc = _run([sys.executable, "-c", _PROBE_RUNNER, str(workspace.resolve()),
+                 str(probes_dir.resolve())], workspace)
     if proc is None or not proc.stdout.strip():
         return {"error": "probe run failed or timed out"}
     try:

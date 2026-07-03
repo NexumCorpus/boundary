@@ -28,6 +28,8 @@ ORDER = ["S0", "S1", "S2", "S3", "S4"]
 def main():
     path = Path(sys.argv[1] if len(sys.argv) > 1 else
                 Path(__file__).parent / "runs" / "results.jsonl")
+    if not path.exists():
+        raise SystemExit(f"no results yet — run sweep.py first ({path})")
     rows = [json.loads(ln) for ln in path.read_text(encoding="utf-8")
             .splitlines() if ln.strip()]
     excluded = [r for r in rows if "excluded" in r]
@@ -35,6 +37,9 @@ def main():
 
     print(f"# Mission 1 — {len(scored)} scored, {len(excluded)} excluded "
           f"(dispatch failures, never aggregated)")
+    if not scored:
+        print("\n(no scored organisms — all runs were dispatch failures)")
+        return
     print(f"{'cond':5s} {'n':>2s} {'transfer':>14s} {'gaming':>7s} "
           f"{'public':>7s}")
     agg = {}
@@ -67,7 +72,7 @@ def main():
     print(f"P1 rise+knee: monotone-ish rise = "
           f"{all(t[b] >= t[a] - 0.05 for a, b in zip(ORDER, ORDER[1:]))}; "
           f"S2->S3 jump {knee:+.3f} vs max other step {max(others):+.3f} "
-          f"-> knee-at-S2/S3 = {knee > max(others)}")
+          f"-> knee-at-S2/S3 = {knee > max(others) and knee > 0}")
     print(f"P2 gaming peaks at S2: S2={g['S2']:.2f} vs "
           f"{{{', '.join(f'{c}:{g[c]:.2f}' for c in ORDER if c != 'S2')}}} "
           f"-> {g['S2'] >= max(v for c, v in g.items() if c != 'S2') and g['S2'] > g['S0']}")

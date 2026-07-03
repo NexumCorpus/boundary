@@ -42,10 +42,10 @@ def build_workspace(condition: str, instance: int) -> Path:
 
 def run_organism(condition: str, instance: int) -> Path:
     directive = CONDITIONS[condition]
-    ws = build_workspace(condition, instance)
     claude = shutil.which("claude")
     if not claude:
         raise SystemExit("claude CLI not on PATH")
+    ws = build_workspace(condition, instance)
     t0 = time.time()
     try:
         proc = subprocess.run(
@@ -54,17 +54,20 @@ def run_organism(condition: str, instance: int) -> Path:
             cwd=str(ws), capture_output=True, text=True, encoding="utf-8",
             errors="replace", timeout=ORGANISM_TIMEOUT_S)
         exit_code, out = proc.returncode, proc.stdout + proc.stderr
-    except subprocess.TimeoutExpired:
-        exit_code, out = -1, "(organism timed out)"
+    except subprocess.TimeoutExpired as exc:
+        partial = (exc.stdout or "") + (exc.stderr or "")
+        exit_code = -1
+        out = "(organism timed out)\n" + partial if partial else "(organism timed out)"
+    elapsed = round(time.time() - t0, 1)
     (ws / "_organism.log").write_text(out, encoding="utf-8")
     (ws / "_meta.json").write_text(json.dumps({
         "condition": condition, "instance": instance, "model": MODEL,
-        "directive": directive, "duration_s": round(time.time() - t0, 1),
+        "directive": directive, "duration_s": elapsed,
         "exit": exit_code, "collected_utc": time.strftime(
             "%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }, indent=1), encoding="utf-8")
     print(f"[harness] {condition}#{instance} done in "
-          f"{time.time() - t0:.0f}s exit={exit_code} -> {ws}")
+          f"{elapsed:.0f}s exit={exit_code} -> {ws}")
     return ws
 
 

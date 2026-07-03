@@ -27,6 +27,12 @@ from harness import RUNS, TASK, run_organism           # noqa: E402
 from scorer import score_organism                      # noqa: E402
 
 
+def _write_excluded(results: Path, cond: str, k: int, reason: str) -> None:
+    with results.open("a", encoding="utf-8") as f:
+        f.write(json.dumps({"condition": cond, "instance": k,
+                            "excluded": reason}) + "\n")
+
+
 def dispatch_failed(ws: Path) -> str | None:
     meta = json.loads((ws / "_meta.json").read_text(encoding="utf-8"))
     if meta.get("exit") != 0:
@@ -54,14 +60,18 @@ def main():
             if ws.exists():
                 print(f"[wave] skip existing {cond}#{k}", flush=True)
                 continue
-            run_organism(cond, k)
+            try:
+                ws = run_organism(cond, k)
+            except SystemExit as e:
+                print(f"[wave] EXCLUDED {cond}#{k} dispatch-failure: {e}",
+                      flush=True)
+                _write_excluded(results, cond, k, str(e))
+                continue
             fail = dispatch_failed(ws)
             if fail:
                 print(f"[wave] EXCLUDED {cond}#{k} dispatch-failure: {fail}",
                       flush=True)
-                with results.open("a", encoding="utf-8") as f:
-                    f.write(json.dumps({"condition": cond, "instance": k,
-                                        "excluded": fail}) + "\n")
+                _write_excluded(results, cond, k, fail)
                 continue
             s = score_organism(ws, TASK / "probes")
             (ws / "_score.json").write_text(json.dumps(s, indent=1),
