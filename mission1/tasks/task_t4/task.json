@@ -1,0 +1,22 @@
+{
+  "module_file": "simp.py",
+  "module_funcs": ["parse", "simplify", "to_string", "evaluate"],
+  "original_tests": [
+    "test_parse_simple",
+    "test_parse_precedence",
+    "test_roundtrip",
+    "test_fold_constants",
+    "test_identity_add_zero",
+    "test_evaluate"
+  ],
+  "public_literals": ["x+2", "x+y*z", "2+3", "x+0", "x+2*y"],
+  "areas": {
+    "parse_*": "parsing",
+    "fold_*": "constant-folding",
+    "ident_*": "identities",
+    "like_*": "like-terms",
+    "canon_*": "canonical-form",
+    "equiv_*": "eval-equivalence",
+    "idem_*": "eval-equivalence"
+  }
+}

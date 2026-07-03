@@ -1,0 +1,26 @@
+{
+  "module_file": "recur.py",
+  "module_funcs": ["parse_rule", "occurrences", "next_after", "count_in"],
+  "original_tests": [
+    "test_parse_every_days",
+    "test_parse_weekly_list",
+    "test_occurrences_interval",
+    "test_occurrences_weekly",
+    "test_next_after_monthly",
+    "test_count_in_biweekly"
+  ],
+  "public_literals": [
+    "every 3 days",
+    "weekly on mon,thu",
+    "weekly on mon",
+    "monthly on 15",
+    "every 2 weeks on fri"
+  ],
+  "areas": {
+    "parsing_*": "parsing-variants",
+    "boundary_*": "window-boundaries",
+    "weekday_*": "weekday-mapping",
+    "monthly_*": "monthly-arithmetic",
+    "consistency_*": "cross-function-consistency"
+  }
+}
