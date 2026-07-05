@@ -1,3 +1,12 @@
 runs/
 __pycache__/
 _audit_ref.py
+
+# credentials — never commit secret material (successor-audit hardening)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
