@@ -1,9 +1,19 @@
-# The Boundary Program
+<div align="center">
+  <img src="./nexum-hero.svg" alt="The Boundary Program — measuring performance versus capability" width="100%" />
 
-**The boundary between performing a property and having it, in optimization
-processes — treated as a measurable phase transition.**
+  <p><strong>When a system passes the test, did it acquire the property—or learn the shape of the test?</strong></p>
 
-## What this is
+  <p><a href="#the-question">The question</a> · <a href="#mission-1--the-specificity-sweep">Mission 1</a> · <a href="./PROGRAM_CONSTITUTION.md">Frozen constitution</a> · <a href="https://github.com/NexumCorpus">Nexum Corpus</a></p>
+</div>
+
+---
+
+The Boundary Program treats the line between <em>performing</em> a property and
+<em>having</em> it as an empirical object: sweep the pressure, measure transfer,
+locate the transition, and preserve the null when the predicted boundary does
+not appear.
+
+## The question
 
 When an AI system passes your tests, one of two things is true: it has the
 capability, or it has learned to *look like* it has the capability. The same
