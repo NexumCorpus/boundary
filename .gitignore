@@ -10,3 +10,17 @@ _audit_ref.py
 *.key
 *.pfx
 *.p12
+# added 2026-10-19 checkpoint
+target/
+nex-build/
+node_modules/
+*.db
+*.sqlite
+*.sqlite3
+*.rlib
+*.o
+*.pdb
+*.exe
+*.dll
+.pytest_cache/
+*.log

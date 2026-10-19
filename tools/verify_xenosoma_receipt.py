@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Trusted Boundary adapter for causal-xenosoma bundles.
-
-This is a verifier, not an Atlas status adapter.  It independently checks the
-commit/reveal and anti-gaming invariants before emitting a source-bound receipt.
-"""
+"""Submitted-transcript consistency verifier, not an execution attestation."""
 import hashlib, json, secrets, subprocess, sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+try:
+    from .xenosoma_transcript import audit
+except ImportError:
+    from xenosoma_transcript import audit
 
 VERIFIER = "boundary-xenosoma-v1"
 PROTOCOL = "boundary-xenosoma-receipt-v1"
@@ -38,11 +38,15 @@ def receipt(bundle):
         ("holdout_reproduced", metrics.get("verificationYield") == 1),
         ("ordinary_dialogue_not_promotion", not bundle.get("promotion") and bundle.get("status") not in {"promoted", "eligible"}),
     ]
+    checks.extend(audit(bundle).items())
     anchors = sorted(set(bundle.get("evidenceAnchors") or []))
     holdout = sorted(set(bundle.get("holdoutAnchors") or []))
     falsifiers = [name for name, ok in checks if not ok]
     payload = {
         "verifier": VERIFIER, "protocolVersion": PROTOCOL, "verifierSourceHead": head(),
+        "verificationScope": "submitted-transcript-consistency",
+        "independentExecution": False,
+        "limitations": ["caller controls the submitted transcript", "historical order and evaluator isolation are not authenticated"],
         "experimentHash": bundle.get("experimentHash"),
         "commitmentRecordHash": bundle.get("commitmentRecordHash"),
         "perturbationRecordHash": bundle.get("perturbationRecordHash"),
