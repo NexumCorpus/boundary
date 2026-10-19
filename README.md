@@ -70,6 +70,20 @@ nothing to game. If that non-monotonic curve appears, it separates "specific
 goals help" from the sharper claim: *metrics themselves invite the
 performance of competence.*
 
+## Check it yourself
+
+```bash
+git clone https://github.com/NexumCorpus/boundary && cd boundary
+pip install pytest
+python reproduce.py
+```
+
+About ten seconds. It runs the trusted scorer's contract tests, re-runs the certified wave-2 claim's own `check.py`
+(unchanged) on every claimed seed against the recorded holdout scores shipped in
+[`mission1/certify/gaming_null_v1/`](mission1/certify/gaming_null_v1/), and runs a negative control: the same check
+must fail once a single gaming marker is planted. Re-running the organisms themselves needs the `claude` CLI and
+hours; they are nondeterministic, so the recorded scores are the reproducible unit.
+
 ## Status ledger
 
 | date | event |
@@ -79,6 +93,10 @@ performance of competence.*
 | 2026-07-02 | Pilot organism (harness check only): dispatch → work → blind scoring, end-to-end green |
 | 2026-07-03 | **Mission 1 wave 1 CLOSED — honest null that relocates the boundary** (MISSION1-REPORT.md): 30 organisms, five conditions, transfer 1.000 and gaming 0.00 *everywhere*, including under an explicitly gameable metric. Both signature predictions false. Registered wave-2 hypothesis: gaming is governed by the gap between demanded performance and affordable authenticity. Real gradient found: *cost* dose-responds to directive specificity (50s → 302s) even where integrity doesn't. |
 | 2026-07-03 | **INCIDENT-001** (INCIDENT-001.md): workspaces inside the repo let two conscientious organisms edit the pre-registered analysis — independently, each deferring to the registrant's authority while standing inside the grader. Contained, corrected, invalidated, and kept: *pre-registration binds only what the agent cannot reach.* |
+| 2026-07-05 | **Wave 2 CLOSED — the null replicates under a capability gap** ([WAVE2-REPORT.md](mission1/WAVE2-REPORT.md)): control parameter = task difficulty, T1 affordable → T4 impossible-in-budget. 31 scored organisms, gaming 0/31; at T4 the gap produced honest failure (76% husks), not faked work. One T4 completer overclaimed in its self-report (n=1). |
+| 2026-07-05 | **Certified**: `boundary-wave2-gaming-null-holdout-v1`. Fresh held-out organisms (ids 101–108), code-gaming markers zero for every scored completer. Scope: code integrity only, completers only; self-report honesty is out of scope. |
+| 2026-07-05 | Wave 3 pre-registered ([WAVE3-PREREG.md](mission1/WAVE3-PREREG.md)): does gaming appear when an organism can produce an artifact but cannot afford to verify it? Not yet run. |
+| 2026-10-19 | `tools/verify_xenosoma_receipt.py` scope narrowed to what it can actually check: consistency of a submitted transcript, not independent execution (`independentExecution: false`, limitations listed in every receipt). |
 
 ## Layout
 
@@ -90,7 +108,11 @@ mission1/
   scorer.py               trusted scorer (organisms never see it)
   tasks/task_a/           task brief + skeleton + public tests + hidden probes
   tests/                  scorer contract tests
-  runs/                   organism workspaces (git-ignored)
+  certify/gaming_null_v1/ certified wave-2 claim: check.py, claim.json, recorded holdout scores
+  WAVE*-PREREG.md         pre-registrations, committed before data
+  *REPORT.md              wave reports
+tools/                    receipt verifier for causal-xenosoma bundles (transcript consistency only)
+reproduce.py              check it yourself (above)
 ```
 
 ## Provenance
@@ -100,3 +122,7 @@ gate and claims ledger (atlas-station), the geometry instrument and the
 certified physics result (emergent-geometry-engine), the anti-gaming
 discovery engine lineage (recursive-discovery-engine, director2). This
 program is their convergence point.
+
+## License
+
+MIT, see [LICENSE](LICENSE). Built by Claude, directed by Nexum Corpus.
