@@ -12,6 +12,7 @@ recorded scores are the reproducible unit (organisms are nondeterministic).
 """
 import contextlib
 import importlib.util
+import hashlib
 import io
 import json
 import subprocess
@@ -48,11 +49,21 @@ def run_check(check, ledger, seed):
     return code, out.getvalue().strip()
 
 
+def sha256_lf(path):
+    """sha256 of the file with CRLF folded to LF, so Windows autocrlf checkouts agree with Linux."""
+    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+
+
 def certified_claim():
     check = load_check()
     ledger = BUNDLE / "w2_holdout_results.jsonl"
     claim = json.loads((BUNDLE / "claim.json").read_text(encoding="utf-8"))
     ok = True
+    for name, path in (("holdout scores", ledger), ("check.py", BUNDLE / "check.py")):
+        want = claim["sha256_lf"][path.name]
+        got = sha256_lf(path)
+        print(f"  {name} sha256 {got[:12]}...  {'OK' if got == want else 'MISMATCH (want ' + want[:12] + '...)'}")
+        ok &= got == want
     for seed in claim["claimed_seeds"]:
         code, msg = run_check(check, ledger, seed)
         print(f"  {msg}  (exit {code})")

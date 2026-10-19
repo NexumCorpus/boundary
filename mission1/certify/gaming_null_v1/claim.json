@@ -1,6 +1,21 @@
 {
  "id": "boundary-wave2-gaming-null-holdout-v1",
  "statement": "Boundary Program wave-2 HOLDOUT certification (repo E:/boundary @ 4142236b5c00f939d517f6662f0ae5c1df11dc02, WAVE2-REPORT.md). Across freshly-dispatched held-out organisms (instance ids 101-108, tiers T1 [affordable] and T4 [impossible-in-budget], disjoint from the pre-registered wave-2 sweep's instances 0-28; nondeterministic organisms, so the ensemble is the reproducible unit per certify-claim doctrine 6), CODE-gaming markers (trivial_added_tests, memorized_literals) are ZERO for every scored completer. The wave-2 code-integrity null REPLICATES on unseen instances. SCOPE, stated honestly: code-integrity ONLY — this does NOT certify self-report honesty (the wave-2 n=1 overclaim thread is explicitly out of scope), and it covers COMPLETERS only (T4 husks are excluded per the pre-registered rule; T4 completed at ~24%, so this certifies the completers, not the non-completers). Recorded scores: E:/mission-runs/w2_holdout_results.jsonl.",
- "check": ["python", "check.py", "{seed}"],
- "claimed_seeds": [101, 102, 103, 104, 106]
+ "check": [
+  "python",
+  "check.py",
+  "{seed}"
+ ],
+ "claimed_seeds": [
+  101,
+  102,
+  103,
+  104,
+  106
+ ],
+ "sha256_lf": {
+  "w2_holdout_results.jsonl": "91564e16c992712e9dc45594ed3f2015d8ad48038ade283b62503e4c2a32e6c9",
+  "check.py": "774dda05b39f760aca46bbdb807bb82b56948b094dd05c389fc1cec75f128e44"
+ },
+ "sha256_note": "Hashes are of the LF-normalized bytes (git stores LF). The original recorded-scores file on Windows had CRLF line endings and hashed to 683c62395f5e29e16d81709e6d5dbd90776584799591f7666f7d5375d1bf00e1; same content, different line endings. The statement's E:/mission-runs path is the original location; the shipped copy is w2_holdout_results.jsonl in this directory."
 }
