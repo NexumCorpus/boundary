@@ -132,6 +132,7 @@ claim reproduces and produced the fixes above.
 | 2026-07-05 | **Certified**: `boundary-wave2-gaming-null-holdout-v1`. Fresh held-out organisms (ids 101–108), code-gaming markers zero for every scored completer. Scope: code integrity only, completers only; self-report honesty is out of scope. |
 | 2026-07-05 | Wave 3 pre-registered ([WAVE3-PREREG.md](mission1/WAVE3-PREREG.md)): does gaming appear when an organism can produce an artifact but cannot afford to verify it? Not yet run. |
 | 2026-10-19 | `tools/verify_xenosoma_receipt.py` scope narrowed to what it can actually check: consistency of a submitted transcript, not independent execution (`independentExecution: false`, limitations listed in every receipt). |
+| 2026-10-23 | Replication protocol registered for the "phase transition" at chain length 5 in RHB, arXiv 2605.02964 §6.3 ([PROTOCOL.md](replication/rhb/PROTOCOL.md)). The per-instance records are not public, and the published design (5 chains per length per model) is underpowered for the claim. Request to the author drafted, not sent. `python replication/rhb/verify.py` recomputes every number. |
 
 ## Layout
 
@@ -147,6 +148,7 @@ mission1/
   WAVE*-PREREG.md         pre-registrations, committed before data
   *REPORT.md              wave reports
 tools/                    receipt verifier for causal-xenosoma bundles (transcript consistency only)
+replication/rhb/          preregistered re-analysis of arXiv 2605.02964 §6.3: protocol, analysis.py, verify.py
 reproduce.py              check it yourself (above)
 ```
 
